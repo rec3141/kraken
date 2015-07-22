@@ -40,7 +40,7 @@ void QuickFile::open_file(string filename_str, string mode, size_t size) {
   int o_flags = mode == "w"
                   ? O_RDWR | O_CREAT | O_TRUNC
                   : mode == "r" ? O_RDONLY : O_RDWR;
-  int m_flags = mode == "r" ? MAP_PRIVATE : MAP_SHARED;
+  int m_flags = mode == "r" ? "MAP_PRIVATE | MAP_NORESERVE" : "MAP_SHARED | MAP_NORESERVE";
 
   fd = open(filename, o_flags, 0666);
   // Second try for R/W if failure was due to non-existence
